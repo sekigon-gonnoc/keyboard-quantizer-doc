@@ -42,6 +42,7 @@ Keyboard Quantizerは一般的なUSBキーボードを自作キーボード用�
 ## 組み立て
 - USBコネクタ、タクトスイッチ、Pro Microをはんだ付けしたら完成です
 - ケースが欲しい場合は添付の図面を参考にしてください
+- バージョンによってLCDの取り付け向きが異なるのでシルクをよく確認してください
 
 ## ボタンの説明
 - RST(Pro Microに近いスイッチ)
@@ -53,7 +54,16 @@ Keyboard Quantizerは一般的なUSBキーボードを自作キーボード用�
 - Pro Microに書き込むファームウェアは[このリポジトリ](https://github.com/sekigon-gonnoc/qmk_firmware/tree/dev/quantizer)のdev/quantizerブランチです
     ```
         git pull https://github.com/sekigon-gonnoc/qmk_firmware.git -b dev/quantizer qmk_quantizer
-        make keyboard_quantizer:default:flash
     ```
-- VIAキーマップはVIA Configuratorに対応していますがeepromのサイズの都合上で2レイヤまでしか変更できないため、より多くのレイヤを使いたい場合はdefaultキーマップを改造してください
+    - アルファ版
+    ```
+        make keyboard_quantizer/rev1:default:flash
+    ```
+    - ベータ版
+    ```
+        make keyboard_quantizer/rev2:default:flash
+    ```
+- VIAキーマップはVIA Configuratorに対応しています
+  - アルファ版の場合は内蔵eepromのサイズの都合上で2レイヤまでしか変更できないため、より多くのレイヤを使いたい場合はdefaultキーマップを改造してください
+  - ベータ版は外付けeepromを使うことでVIA用のレイヤを増やすことができます。初期値は6で、設定変更でより増やすこともできます
 - VIA Configuratorからキーマップを書き換えるにはkeyboard-quantizer.jsonを読み込ませてください
