@@ -54,7 +54,7 @@ Keyboard Quantizerは一般的なUSBキーボードを自作キーボード用�
 ### Pro Microの場合
 - Pro Microに書き込むファームウェアは[このリポジトリ](https://github.com/sekigon-gonnoc/qmk_firmware/tree/dev/quantizer)のdev/quantizerブランチです
     ```
-        git pull https://github.com/sekigon-gonnoc/qmk_firmware.git -b dev/quantizer qmk_quantizer
+        git clone https://github.com/sekigon-gonnoc/qmk_firmware.git -b dev/quantizer qmk_quantizer
     ```
     - アルファ版
     ```
