@@ -26,5 +26,7 @@
 - VIAキーマップはVIA Configuratorに対応しています
   - レイヤ数の初期値は6で、設定変更でより増やすこともできます
   - VIA Configuratorからキーマップを書き換えるには[keyboard-quantizer.json](keyboard-quantizer.json)を読み込ませてください
-- ブートローダを起動するにはキーマップにRESETを割り当ててください
-  - defaultキーマップではシリアルポートを1200bpsで開いてから閉じることでも起動できます
+- ブートローダを以下のいずれかの手順で起動できます
+  - Quantizerにキーボードを挿していない状態でPCに接続する
+  - キーマップに割り当てたRESETキーを押す
+  - (defaultキーマップ)シリアルポートを1200bpsで開いてから閉じる
