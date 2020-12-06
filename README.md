@@ -1,7 +1,11 @@
-# Keyboard Quantizer ビルドガイド
+# Keyboard Quantizer
 Keyboard Quantizerは一般的なUSBキーボードを自作キーボード用のファームウェアの定番であるQMKに対応させるためのボードです。キー配列を自由に変えられるだけでなく、キーボードにレイヤ、マクロ、コンビネーションなどの機能を追加できるようになります。
 
 2個のUSBポートがあるので最大で2台のキーボードを接続できます。また、ファームウェアを開発することによってマウスなどその他のHID機器も接続できます。
+
+|![rev2](img/rev2.jpg)|![rev3](img/rev3_rear.jpg)|
+|-|-|
+|rev1(rev2はPro Micro側にLCDを取り付けます)|rev3|
 
 ## 制約事項
 簡単な仕組みとしては、
@@ -17,58 +21,6 @@ Keyboard Quantizerは一般的なUSBキーボードを自作キーボード用�
 
 この前提を満たさないキーボード(NKRO対応しているものなど)で使う場合にはファームウェアを改造する必要があります。
 
-## キット内容
-本キットには以下の部品が入っています
-
-|部品|数量|
-|--|--|
-|メイン基板(表面実装部品実装済み) |1
-|USBコネクタ |2
-|タクトスイッチ |2
-|ねじ、スペーサ |4
-
-## キット以外に必要な部品
-
-本キットを完成させるには以下の部品が追加で必要です
-
-|部品|数量|
-|--|--|
-|Pro Micro または BLE Micro Pro|1|
-|コンスルーまたはピンヘッダ/ソケット|適量|
-
-- お好みに応じてOLEDを取り付けることもできます
-- USBホスト用ICのファームを書き換える場合にはUSB-UARTブリッジが必要です
-
-## 組み立て
-- USBコネクタ、タクトスイッチ、Pro Microをはんだ付けしたら完成です
-- ケースが欲しい場合は添付の図面を参考にしてください
-- バージョンによってLCDの取り付け向きが異なるのでシルクをよく確認してください
-
-## ボタンの説明
-- RST(Pro Microに近いスイッチ)
-    - Pro Microをリセットする。QMKファームウェアを書き込むときに使う
-- BOOT(Pro Microから遠いスイッチ)
-    - このボタンを押しながら電源を入れると、USBホストICのブートローダが起動する。USBホストICのファームウェアをアップデートするときに使う
-
-## ファームウェア
-### Pro Microの場合
-- Pro Microに書き込むファームウェアは[このリポジトリ](https://github.com/sekigon-gonnoc/qmk_firmware/tree/dev/quantizer)のdev/quantizerブランチです
-    ```
-        git clone https://github.com/sekigon-gonnoc/qmk_firmware.git -b dev/quantizer qmk_quantizer
-    ```
-    - アルファ版
-    ```
-        make keyboard_quantizer/rev1:default:flash
-    ```
-    - ベータ版
-    ```
-        make keyboard_quantizer/rev2:default:flash
-    ```
-- VIAキーマップはVIA Configuratorに対応しています
-  - アルファ版の場合は内蔵eepromのサイズの都合上で2レイヤまでしか変更できないため、より多くのレイヤを使いたい場合はdefaultキーマップを改造してください
-  - ベータ版は外付けeepromを使うことでVIA用のレイヤを増やすことができます。初期値は6で、設定変更でより増やすこともできます
-- VIA Configuratorからキーマップを書き換えるにはkeyboard-quantizer.jsonを読み込ませてください
-
-### BLE Micro Proの場合
-- BLE Micro Pro Web Configuratorを使ってください
-  - レイヤの最大数は4です
+## ビルドガイド
+- [rev2以前(Pro Microを乗せるタイプ)](rev2.md)
+- [rev3(ケースに入ったタイプ)](rev3.md)
