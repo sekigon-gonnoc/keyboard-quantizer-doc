@@ -89,9 +89,9 @@
   #undef QUANTIZER_REPORT_PARSER
 
   // Use fixed parser. Enabled for 'fixed' keymap
-  #define QUANTIZER_REPORT_PARSER REPORT_PARSER_DEFAULT
-  //or use default parser 
   #define QUANTIZER_REPORT_PARSER REPORT_PARSER_FIXED
+  //or use default parser 
+  #define QUANTIZER_REPORT_PARSER REPORT_PARSER_DEFAULT
   ```
 
 ### 仮想シリアルポート
