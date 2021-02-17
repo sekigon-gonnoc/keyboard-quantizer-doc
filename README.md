@@ -8,6 +8,10 @@ Keyboard Quantizerは一般的なUSBキーボードを自作キーボード用�
 |-|-|
 |rev1(rev2はPro Micro側にLCDを取り付けます)|rev3|
 
+## 販売リンク
+- [BOOTH](https://nogikes.booth.pm/items/2256612)
+- [遊舎工房](https://yushakobo.jp/shop/keyboard-quantizer/)
+
 ## 制約事項
 簡単な仕組みとしては、
 1. USBホスト用のマイコンがUSB機器と通信し
