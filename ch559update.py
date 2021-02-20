@@ -132,6 +132,8 @@ def __verifyBinFile(binfile, com, checksum, devid):
     remains = len(binfile)
 
     for chunk in chunks:
+        if len(chunk) < 56:
+            chunk.extend([0xFF]*(56-len(chunk)))
         cmd = __makeVerifyCmd(addr, remains, chunk, checksum, devid)
         addr = addr + len(chunk)
         remains = remains - len(chunk)
@@ -139,7 +141,7 @@ def __verifyBinFile(binfile, com, checksum, devid):
         logging.debug('send:' + __dumpHex(cmd))
         ret = com.read(size=9)
         if ret[6] != 0:
-            raise Exception(f'verify failed at address {addr}')
+            raise Exception(f'verify failed at address {addr - len(chunk)} to {addr}')
         logging.debug('receive:' + __dumpHex(ret))
         print('.', end='', flush=True)
 
