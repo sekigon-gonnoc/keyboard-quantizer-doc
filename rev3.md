@@ -52,7 +52,7 @@
   - (defaultキーマップ)シリアルポートを1200bpsで開いてから閉じる
 
 ## (未組立版の組立時など)ホスト用ファームの書きこみ
-- atmega32u4を経由してUSBホスト用のICにファームを書き込みます
+- atmega32u4を経由してUSBホスト用のICにファームを書き込みます。[keyboard-quantizer-doc](https://github.com/sekigon-gonnoc/keyboard-quantizer-doc)の`ch559update.py`と`CH559USB.bin`を使用します
 - Python 3.7以上が必要です
 - atmega32u4にbootloaderキーマップのファームが書き込まれている前提です
 - キーボードを繋いでいない状態のQuantizerをPCに接続し、3秒以内に(PCにCOMポートが認識されている間に)下記コマンドを実行してください
