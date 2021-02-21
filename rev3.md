@@ -85,7 +85,7 @@
 - bootloader
   - ホストICのアップデートのためのファームウェア
 - via
-  - VIA/Remapからキーマップを書き換えるためのファームウェア
+  - [VIA](https://caniusevia.com/)/[Remap](https://remap-keys.app/)からキーマップを書き換えるためのファームウェア
 - fixed
   - fixedパーサを使ったファームウェア
 - mouse
@@ -141,9 +141,9 @@
 
 
 ### VIA対応
-- viaキーマップはVIA Configuratorに対応しています
+- viaキーマップは[VIA Configurator](https://caniusevia.com/)および[Remap](https://remap-keys.app/)に対応しています
   - レイヤ数の初期値は6で、設定変更でより増やすこともできます
-  - VIA Configuratorからキーマップを書き換えるには[keyboard-quantizer.json](keyboard-quantizer.json)を読み込ませてください
+  - VIA/Remapに[keyboard-quantizer.json](keyboard-quantizer.json)を読み込ませてください
 - 独自のキーマップをVIAに対応させる場合はrules.mkに以下のオプションを指定してください
   ```makefile
   VIA_ENABLE = yes
