@@ -85,7 +85,7 @@
 - bootloader
   - ホストICのアップデートのためのファームウェア
 - via
-  - [VIA](https://caniusevia.com/)/[Remap](https://remap-keys.app/)からキーマップを書き換えるためのファームウェア
+  - [VIA](https://caniusevia.com/)または[Remap](https://remap-keys.app/)からキーマップを書き換えるためのファームウェア
 - fixed
   - fixedパーサを使ったファームウェア
 - mouse
