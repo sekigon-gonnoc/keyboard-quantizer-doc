@@ -71,6 +71,7 @@
 
 ### ホスト用ファームの書きこみ
 - [CH559 Web Updater](https://sekigon-gonnoc.github.io/ch559-web-updater/)を使ってUSBホストICのファームを変更します
+- **bootloaderキーマップが書き込まれている前提です**
   - Google ChromeからCH559 Web Updaterにアクセス
   - CH559 Web UpdaterのFlashボタンをクリック
   - ポート選択のポップアップが現れたら、bootloaderキーマップを書き込んだQuantizerをPCに接続する
