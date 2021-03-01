@@ -181,6 +181,7 @@
   - virtserを無効にする
   - viaを無効にする
   - consoleを無効にする
+  - LTO(Link time optimization)を有効にする
 
 その他QMKのドキュメントを参考にしてください
 
