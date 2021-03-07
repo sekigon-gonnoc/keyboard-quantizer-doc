@@ -35,4 +35,4 @@ NKROやポインティングデバイス付きのキーボードについては�
 - xxキーボードで動きますか？
   - xxキーボードが手元にない場合は回答できません
     - HIDキーボードとして認識されるのであれば最終的にはQMKファームウェアを編集することで動作させられると思われます
-  - Realforce, Thikpad keyboard(有線)では動作しました。Thinkpad keyboardの場合トラックポイントも動作します 
+  - Realforce(R2-US5-BK AGBZ51), ThinkPad トラックポイント・キーボード英語(KU-1255)では動作しました。Thinkpad keyboardの場合トラックポイントも動作します 
