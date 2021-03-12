@@ -144,7 +144,7 @@
    |-|-|
    |default|レポートディスクリプタを使ってレポートを解釈する。<br>ファームの容量が大きくなる代わりにNKROやポインティングデバイス付きのキーボードが動作する可能性がある|
    |fixed|6KROのキーボードのみ動作する、以前のファームと同じ動作。ファームの容量が小さい|
-   |user|keymap.cなどに独自のパーサを実装する|
+   |user|keymap.cなどに独自のパーサを実装する。[解説](user_parser)|
 - デフォルトパーサから変更するにはビルド時にオプションとして`PARSER=<parser>`を追加するか、config.hで指定してください
   ```bash
     make keyboard_quantizer/rev3:default PARSER=fixed
