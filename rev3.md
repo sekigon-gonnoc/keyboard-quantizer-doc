@@ -115,6 +115,8 @@
     ```bash
         # qmk_quantizerというフォルダ名でリポジトリをクローン
         git clone https://github.com/sekigon-gonnoc/qmk_firmware.git -b dev/sekigon qmk_quantizer
+        # クローンしたディレクトリに移動
+        cd qmk_quantizer
         # bootloaderキーマップを書きこみ
         # dfu-programmerをつかうため、管理者権限がないと失敗する場合がある
         make keyboard_quantizer/rev3:bootloader:flash
