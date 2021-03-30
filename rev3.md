@@ -103,7 +103,7 @@
 - [VIA](https://caniusevia.com/)または[Remap](https://remap-keys.app/)からキーマップを書き換えられます。ここではRemapを使った方法を説明します
   - Remapにアクセス
   - `START REMAP...` → `+KEYBOARD`の順にクリックし、ポップアップからKeyboard Quantizerを選択して接続
-  - 歯車アイコン->LayoutからJIS/USレイアウトを選択
+  - 右側のアイコン->Layout OptionからJIS/USレイアウトを選択
   - キーマップを変更したら右上のFlashから書き換え
 
 **以上で使用する準備は完了です。もっと細かくキーボードの挙動を変えたい場合やマウスの挙動を変えたい場合にはQMKファームウェアを書き換える必要があります**
