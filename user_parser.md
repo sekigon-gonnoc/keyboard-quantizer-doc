@@ -28,10 +28,22 @@
   - サンプルではVID:PIDがトラックポイントキーボードと一致した場合は専用の関数を、それ以外では6KROキーボード用の関数を呼び出している
 
 ## レポートの形式を調べる
-[defaultキーマップ](https://github.com/sekigon-gonnoc/keyboard-quantizer-doc/releases/download/0.3.1/keyboard_quantizer_rev3_default.hex)のデバッグ機能を使ってどんなレポートが送られてくるか調べられます
+
+### デバッグ機能の有効化
+
+#### rev3の場合
+
+- [defaultキーマップ](https://github.com/sekigon-gonnoc/keyboard-quantizer-doc/releases/download/0.3.1/keyboard_quantizer_rev3_default.hex)を書き込む必要があります
 
 - defaultキーマップの書き込み
   - `make keyboard_quantizer/rev3:default:flash`
+
+#### rev4の場合
+
+- すべてのキーマップでデバッグ機能が有効化済みです
+
+### 送られてくるデータの確認
+
 - TeraTermなどでシリアルポートを開く(ボーレートは1200bps以外)
 - シリアルポートから`d`を送信
   - デバッグプリントが表示される

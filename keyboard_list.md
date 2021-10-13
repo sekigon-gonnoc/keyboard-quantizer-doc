@@ -28,8 +28,9 @@ default/via以外のファームウェアを使用したり、ファームを改
 - eSYNiC® mini Wireless Keyboard 92k
 - Ewin® mini Wireless keyboard 72k
 - CASIO MZ-20 テンキー電卓
+- PFU Happy Hacking Keyboard Professional2(rev.4)
 
 ### 非対応
 
-- PFU Happy Hacking Keyboard Professional2
+- PFU Happy Hacking Keyboard Professional2(rev.3まで)
 - PERIXX PERIDUO-406

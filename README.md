@@ -11,7 +11,7 @@ Keyboard Quantizerは一般的なUSBキーボードを自作キーボード用�
 
 |![rev2](img/rev2.jpg)|![rev3](img/rev3_rear.jpg)|
 |-|-|
-|rev1(rev2はPro Micro側にLCDを取り付けます)|rev3|
+|rev1(rev2はPro Micro側にLCDを取り付けます)|rev3, rev4|
 
 ## 販売リンク
 - [BOOTH](https://nogikes.booth.pm/items/2256612)
@@ -35,6 +35,7 @@ NKROやポインティングデバイス付きのキーボードについては�
 ## ビルドガイド
 - [rev2以前(Pro Microを乗せるタイプ)](rev2.md)
 - [rev3(ケースに入ったタイプ)](rev3.md)
+- [rev4(基板にKeyboard Quantize RPのシルクがある)](rev4.md)
 
 ## よくある質問
 - xxキーボードで動きますか？
