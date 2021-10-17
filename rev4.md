@@ -55,7 +55,7 @@ Rev4はメインのMCUがatmega32u4からRP2040に変更されています。ま
     - その場合、固定パーサファームウェアも試してみてください 
 
 ### キーマップの書き換え
-- [VIA](https://caniusevia.com/)または[Remap](https://remap-keys.app/)からキーマップを書き換えられます。ここではRemapを使った方法を説明します
+- [Remap](https://remap-keys.app/)からキーマップを書き換えられます
   - Remapにアクセス
   - `START REMAP...` → `+KEYBOARD`の順にクリックし、ポップアップからKeyboard Quantizerを選択して接続
   - 右側のアイコン->Layout OptionからJIS/US/Mouseレイアウトを選択
