@@ -9,6 +9,7 @@ Rev4はメインのMCUがatmega32u4からRP2040に変更されています。ま
 - [組み立て手順](#組み立て手順)
   - [キット内容](#キット内容)
   - [組み立て](#組み立て)
+  - [ファームウェアの書き込み](#ファームウェアの書き込み)
   - [動作確認](#動作確認)
   - [キーマップの書き換え](#キーマップの書き換え)
     - [マウスの設定を書き換える場合](#マウスの設定を書き換える場合)
@@ -51,6 +52,17 @@ Rev4はメインのMCUがatmega32u4からRP2040に変更されています。ま
   
 - ケースを開けるときはマイナスドライバーなど薄いものを側面の隙間にいれてこじ開けてください
   - 鋭利な工具を使用する場合は怪我に注意してください
+
+### ファームウェアの書き込み
+
+出荷時に書き込まれているファームウェアは最新版でない場合があります。下記手順に沿ってファームウェアを更新してください。
+
+* QuantizerをPCに差し込んむ
+* 適当なターミナルソフトからボーレート1200bpsの設定でQuantizerに接続する
+  * 例えば[WebSerialPlotterをChromeで開き](https://sekigon-gonnoc.github.io/web-serial-plotter/)、baudrateを1200にして`OPEN`をクリック、ポップアップが表示されたらKeyboard Quantizerを選択して接続する。どれがQuantizerか分からない場合、ポップアップが出ている状態で抜き差しして、変化があったデバイスを選択する
+* QuantizerとPCの接続が一度切断され、RPI-PR2という外部ストレージとして認識されなおしていることを確認する
+* [最新ファームのUF2ファイル](firmware/rev4/keyboard_quantizer_rp_default.uf2)をダウンロードし、外部ストレージにコピーする
+* RPI-RP2が切断され、再度Quantizerとして認識されたら更新完了
 
 ### 動作確認
 - キーボードをQuantizerに繋いでからPCに接続し、打鍵したキーがそのままPCに入力されることを確認してください
@@ -98,7 +110,7 @@ Rev4はメインのMCUがatmega32u4からRP2040に変更されています。ま
 
 ### QMKファームウェアのビルド
 - rev4はRP2040を内蔵しています。書き込むファームウェアは[このリポジトリ](https://github.com/sekigon-gonnoc/qmk_firmware/tree/dev/sekigon)のrp2040ブランチです
-- 前準備としてpico-sdk(1.2.0)の導入が必要です
+- 前準備としてpico-sdkの導入が必要です
   - 導入手順は[https://github.com/raspberrypi/pico-sdk](https://github.com/raspberrypi/pico-sdk) を確認してください
   - PICO_SDK_PATHには絶対パスを指定してください
 
