@@ -179,6 +179,9 @@ Keyboard Quantizer Configuratorで  `Use last layer as combo setting` を有効�
 ### ファームウェア更新履歴
 
 - 0.1.4
+  - 疑似US/JP配列を設定可能にする
+  - Tapping termやマウスジェスチャの閾値を変更可能にする
+  - 接続先OSの判定を追加
   - Keyboard Quantizer Configuratorに対応
 - 0.1.3
   - マウスボタンをLT()に入れたときの挙動を修正
