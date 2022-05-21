@@ -13,6 +13,9 @@ Rev4はメインのMCUがatmega32u4からRP2040に変更されています。ま
   - [動作確認](#動作確認)
   - [キーマップの書き換え](#キーマップの書き換え)
     - [マウスの設定を書き換える場合](#マウスの設定を書き換える場合)
+  - [各種設定の変更](#各種設定の変更)
+    - [Comboの設定](#comboの設定)
+    - [Key overrideの設定](#key-overrideの設定)
 - [ファームウェア](#ファームウェア)
   - [ビルド済みファームウェア](#ビルド済みファームウェア)
   - [QMKファームウェアの更新](#qmkファームウェアの更新)
@@ -64,6 +67,7 @@ Rev4はメインのMCUがatmega32u4からRP2040に変更されています。ま
 * QuantizerとPCの接続が一度切断され、RPI-PR2という外部ストレージとして認識されなおしていることを確認する
 * [最新ファームのUF2ファイル](firmware/rev4/keyboard_quantizer_rp_default.uf2)をダウンロードし、外部ストレージにコピーする
 * RPI-RP2が切断され、再度Quantizerとして認識されたら更新完了
+  * ファームウェアによっては手動で抜き差しが必要な場合もあります
 
 ### 動作確認
 - キーボードをQuantizerに繋いでからPCに接続し、打鍵したキーがそのままPCに入力されることを確認してください
@@ -88,6 +92,37 @@ Rev4はメインのMCUがatmega32u4からRP2040に変更されています。ま
 - 簡易ジェスチャ機能はLTやMOでレイヤ移動した状態でカーソルを動かしてから元のレイヤに戻った時に実行されます
 - Remap上ではHoldにレイヤ移動を、Tapにマウスボタンを指定することができます。ボタン4, 5の用に通常は長押ししないボタンと組み合わせることでボタン数が少ないマウスでもレイヤ機能を活用できます
 
+### 各種設定の変更
+
+- [Keyboard Quantizer Configurator] を使って閾値や動作を変更できます。このサイトはChromeかEdgeでのみ動作します。
+
+|項目|内容|
+|-|-|
+|default layer|0~7に変更できます|
+|key override|JP配列のキーボードをUS設定のOSに繋いだり、US配列のキーボードをJP設定のOSにつないだときに印字通りに入力できるようになります|
+|Use last layer as combo setting|最終レイヤの設定内容をもとにQMKの[Combo](https://docs.qmk.fm/#/feature_combo?id=combos)を設定できます（詳細は後述）|
+|Tapping term|60~340msの間で20ms刻みで設定できます|
+|Use simple parser|接続したキーボードを6KROと決め打ちして入力を認識します|
+|Mouse gesture|マウス向けの簡易ジェスチャ機能の閾値を10~150pxの間で10px刻みで設定できます|
+|Swap XXXX|QMKのSwap XXXX を設定できます|
+
+- `Enable per host OS config` にチェックを入れることで、これらの設定をQuantizerの接続先OS（Win, Mac, Linux, その他）によって切り替えられます
+
+#### Comboの設定
+
+Keyboard Quantizer Configuratorで  `Use last layer as combo setting` を有効にすると最終レイヤのキーマップをコンボの設定に変換できます
+
+- RemapでLayout optionを`ALL`にする
+- 左上から順にコンボに使用するキーの組み合わせ、コンボが発動したときに入力するキー、KC_NO（RemapだとNOOP）と並べていきます。KC_NOを2個並べると以降のキーは無視されます
+- 例えば LSHIFT+RSHIFT -> CAPS LOCK, J+K+L -> Enter と設定するには下記のようにします。
+![](img/last_layer_combo.png)
+- Reampでキーマップを書き換えたあとQuantizerを再起動するか、Cobmo on/off/toggle のいずれかのキーを押すことでコンボ設定に反映されます
+
+#### Key overrideの設定
+
+- Func01を押すことでUS keyboard on JP OS, Func02を押すことでJP keyboard on US OSを設定することもできます
+- 無効にする場合はFunc0を押してください
+
 **以上で使用する準備は完了です。もっと細かくキーボードの挙動を変えたい場合にはQMKファームウェアを書き換える必要があります**
 
 ## ファームウェア
@@ -96,7 +131,7 @@ Rev4はメインのMCUがatmega32u4からRP2040に変更されています。ま
 ||説明|
 |-|-|
 |[初期ファームウェア](firmware/rev4/keyboard_quantizer_rp_default.uf2)| 初期状態のファームウェアです。接続したUSB機器のディスクリプタを解析して認識しようとしますが、うまくいかない場合もあります。マウスを認識することもできます|
-|[固定パーサファームウェア](firmware/rev4/keyboard_quantizer_rp_fixed.uf2)|6KROのキーボードと決め打ちして入力を認識します。初期ファームウェアではうまく認識できないキーボードが認識できる場合があります。マウスは認識できません|
+|~~固定パーサファームウェア~~|~~6KROのキーボードと決め打ちして入力を認識します。初期ファームウェアではうまく認識できないキーボードが認識できる場合があります。マウスは認識できません~~ Keyboard Quantizer Configurator を使ってsimple parser を有効化してください|
 
 上記のファームウェアでうまくいかない場合(非対応のポインティングデバイス内臓キーボードなど)はファームウェアを改造する必要があります
 
@@ -111,15 +146,14 @@ Rev4はメインのMCUがatmega32u4からRP2040に変更されています。ま
 
 ### QMKファームウェアのビルド
 - rev4はRP2040を内蔵しています。書き込むファームウェアは[このリポジトリ](https://github.com/sekigon-gonnoc/qmk_firmware/tree/dev/sekigon)のrp2040ブランチです
-- 前準備としてpico-sdkの導入が必要です
-  - 導入手順は[https://github.com/raspberrypi/pico-sdk](https://github.com/raspberrypi/pico-sdk) を確認してください
-  - PICO_SDK_PATHには絶対パスを指定してください
 
     ```bash
         # qmk_quantizerというフォルダ名でリポジトリをクローン
         git clone https://github.com/sekigon-gonnoc/qmk_firmware.git -b rp2040 qmk_quantizer
         # クローンしたディレクトリに移動
         cd qmk_quantizer
+        # submoduleを取得
+        make git-submodule
         # uf2ファイルを生成する場合
         make keyboard_quantizer/rp:default:uf2
         # picotoolで書き込む場合
@@ -132,22 +166,8 @@ Rev4はメインのMCUがatmega32u4からRP2040に変更されています。ま
 
 ### キーマップのオプション
 #### レポートパーサの設定
-- キーボード(HIDデバイス)が送信するレポートを解釈する関数を3つのオプションから設定できます
-   |オプション|特徴|
-   |-|-|
-   |default|レポートディスクリプタを使ってレポートを解釈する。<br>ファームの容量が大きくなる代わりにNKROやポインティングデバイス付きのキーボードが動作する可能性がある|
-   |fixed|6KROのキーボードのみ動作する、以前のファームと同じ動作。ファームの容量が小さい|
-   |user|keymap.cなどに独自のパーサを実装する。[解説](user_parser)|
-- パーサは各キーマップのconfig.hで指定してください
 
-  ```c
-  #undef QUANTIZER_REPORT_PARSER
-
-  // Use fixed parser. Enabled for 'fixed' keymap
-  #define QUANTIZER_REPORT_PARSER REPORT_PARSER_FIXED
-  //or use default parser 
-  #define QUANTIZER_REPORT_PARSER REPORT_PARSER_DEFAULT
-  ```
+デフォルトのファームで目的のデバイスが認識できない場合はkeymap.cに独自のパーサを実装してください。[解説](user_parser)|
 
 #### シリアルポート
 - シリアルポートからデバッグ情報を読み出したりブートローダを起動したりできます
@@ -158,6 +178,8 @@ Rev4はメインのMCUがatmega32u4からRP2040に変更されています。ま
 
 ### ファームウェア更新履歴
 
+- 0.1.4
+  - Keyboard Quantizer Configuratorに対応
 - 0.1.3
   - マウスボタンをLT()に入れたときの挙動を修正
 - 0.1.2
