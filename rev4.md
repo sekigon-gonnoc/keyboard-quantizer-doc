@@ -94,7 +94,7 @@ Rev4はメインのMCUがatmega32u4からRP2040に変更されています。ま
 
 ### 各種設定の変更
 
-- [Keyboard Quantizer Configurator] を使って閾値や動作を変更できます。このサイトはChromeかEdgeでのみ動作します。
+- [Keyboard Quantizer Configurator](https://sekigon-gonnoc.github.io/keyboard-quantizer-configurator/) を使って閾値や動作を変更できます。このサイトはChromeかEdgeでのみ動作します。
 
 |項目|内容|
 |-|-|
