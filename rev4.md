@@ -64,10 +64,10 @@ Rev4はメインのMCUがatmega32u4からRP2040に変更されています。ま
 * QuantizerをPCに差し込んむ
 * 適当なターミナルソフトからボーレート1200bpsの設定でQuantizerに接続する
   * 例えば[WebSerialPlotterをChromeで開き](https://sekigon-gonnoc.github.io/web-serial-plotter/)、baudrateを1200にして`OPEN`をクリック、ポップアップが表示されたらKeyboard Quantizerを選択して接続する。どれがQuantizerか分からない場合、ポップアップが出ている状態で抜き差しして、変化があったデバイスを選択する
-* QuantizerとPCの接続が一度切断され、RPI-PR2という外部ストレージとして認識されなおしていることを確認する
+* QuantizerとPCの接続が一度切断され、RPI-PR2という外部ストレージとして認識されていることを確認する
 * [最新ファームのUF2ファイル](firmware/rev4/keyboard_quantizer_rp_default.uf2)をダウンロードし、外部ストレージにコピーする
 * RPI-RP2が切断され、再度Quantizerとして認識されたら更新完了
-  * ファームウェアによっては手動で抜き差しが必要な場合もあります
+  * ファームウェアによっては手動での抜き差しが必要です
 
 ### 動作確認
 - キーボードをQuantizerに繋いでからPCに接続し、打鍵したキーがそのままPCに入力されることを確認してください
@@ -122,6 +122,7 @@ Keyboard Quantizer Configuratorで  `Use last layer as combo setting` を有効�
 
 - Func01を押すことでUS keyboard on JP OS, Func02を押すことでJP keyboard on US OSを設定することもできます
 - 無効にする場合はFunc0を押してください
+- これらのキーはRemap上では `SPECIAL`タブのFUNCグループから選択できます
 
 **以上で使用する準備は完了です。もっと細かくキーボードの挙動を変えたい場合にはQMKファームウェアを書き換える必要があります**
 
