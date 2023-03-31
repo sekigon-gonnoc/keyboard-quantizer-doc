@@ -5,6 +5,7 @@ import math
 import argparse
 import serial
 import logging
+import time
 
 PACKET_HEADER = [0x57, 0xab]
 DETECT_CMD = [
@@ -17,6 +18,10 @@ ERASE_CMD = [0xa4, 0x01, 0x00, 0x00]
 WRITE_CMD = [0xa5, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
 VERIFY_CMD = [0xa6, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
 READ_CFG_CMD = [0xa7, 0x02, 0x00, 0x1f, 0x00]
+WRITE_CFG_CMD = [
+    0xa8, 0x0e, 0x00, 0x07, 0x00, 0xff, 0xff, 0xff, 0xff, 0x03, 0x00, 0x00,
+    0x00, 0xff, 0x4e, 0x00, 0x00
+]
 
 PAGE_MAX = 60
 
@@ -91,6 +96,15 @@ def __makeResetCmd():
 
 def __makeReadCfgCmd():
     cmd = READ_CFG_CMD
+    cmd = __appendChecksum(cmd)
+    return __appendHeader(cmd)
+
+
+def __makeWriteCfgCmd(changeBootpin):
+    cmd = WRITE_CFG_CMD
+    if changeBootpin:
+        cmd[9] = 0x01
+
     cmd = __appendChecksum(cmd)
     return __appendHeader(cmd)
 
@@ -175,7 +189,19 @@ def __getCfg(com):
     version = f'ver{ret[21]}.{ret[22]}{ret[23]}'
     checksum = sum(ret[24:28]) & 0xff
 
-    return {'version': version, 'checksum': checksum}
+    return {'version': version, 'checksum': checksum, 'bootpin': ret[12]}
+
+
+def __setCfg(com, changeBootpin):
+    if not com.isOpen():
+        raise
+    cmd = __makeWriteCfgCmd(changeBootpin)
+    ret = com.write(cmd)
+    logging.debug('send:' + __dumpHex(cmd))
+    ret = com.read(size=9)
+    if (ret[5] != 0):
+        return None
+    logging.debug('receive:' + __dumpHex(ret))
 
 
 def __sendKey(com):
@@ -208,13 +234,37 @@ def __restartUserCode(com):
     logging.debug('receive:' + __dumpHex(ret))
 
 
-def __ch559flash(args, com):
+def __ch559erase(args, com):
     if com is None:
         print('No COM port')
         return
 
     __detectCh559(com)
     cfg = __getCfg(com)
+
+    print('Chip erase start...')
+    __eraseChip(com, PAGE_MAX * 1024)
+    print('Chip erase complete.')
+
+
+def __ch559flash(args, com):
+    if com is None:
+        print('No COM port')
+        return
+
+    try:
+        __detectCh559(com)
+    except:
+        com.reset_output_buffer()
+        com.reset_input_buffer()
+        time.sleep(1)
+        __detectCh559(com)
+
+    cfg = __getCfg(com)
+
+    if args.bootpin_change:
+        print('change boot pin to 5.1')
+    __setCfg(com, args.bootpin_change)
 
     if args.file != '':
 
@@ -250,6 +300,9 @@ def __ch559verify(args, com):
     __detectCh559(com)
     cfg = __getCfg(com)
 
+    print('config:')
+    print(cfg)
+
     if args.file != '':
 
         __sendKey(com)
@@ -268,6 +321,7 @@ def __ch559update():
     parser.add_argument('-p', '--port', type=str, default='')
     parser.add_argument('-r', '--reset', action='store_true')
     parser.add_argument('-v', '--verbose', action='store_true')
+    parser.add_argument('-b', '--bootpin_change', action='store_true')
 
     subparsers = parser.add_subparsers()
 
@@ -280,6 +334,11 @@ def __ch559update():
                                           parents=[parser],
                                           add_help=False)
     parser_verify.set_defaults(handler=__ch559verify)
+
+    parser_erase = subparsers.add_parser('erase',
+                                         parents=[parser],
+                                         add_help=False)
+    parser_erase.set_defaults(handler=__ch559erase)
 
     args = parser.parse_args()
 
