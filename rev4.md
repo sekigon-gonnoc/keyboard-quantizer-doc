@@ -163,7 +163,13 @@ Keyboard Quantizer Configuratorで  `Use last layer as combo setting` を有効�
     ```
 
 ### ホスト用ファームウェア
+
 - Rev4はホスト用ファームウェア書き込み済みで出荷しています。Rev3向けとはファームウェアが異なるため、間違えて書き込まないように注意してください
+  - https://github.com/sekigon-gonnoc/CH559sdccUSBHost/tree/quantizer_ex
+  - 書き込みには[ch559update.py](https://github.com/sekigon-gonnoc/keyboard-quantizer-doc/blob/master/ch559update.py) を使用してください
+  ```bash
+  ./ch559update.py flash -p /dev/ttyACM0 -f CH559USB_1_1_0.bin -b
+  ```
 
 
 ### キーマップのオプション
