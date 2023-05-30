@@ -254,7 +254,9 @@
 
 接続しているキーボードの言語配列を設定します (`US` or `JP`)。
 
-注: この設定はEEPROM初期化時のデフォルト値です。EEPROM上の設定値は`SET_KB_LANG_US`, `SET_KB_LANG_JP`を押すことで切り替わります
+省略した場合は`US`が設定されます。
+
+注: この設定はEEPROM初期化時のデフォルト値です。EEPROM上の設定値は`SET_KB_LANG_US`, `SET_KB_LANG_JP`を押すことで切り替わります。
 
 #### `default.os_language`
 
@@ -262,21 +264,38 @@
 
 マクロ送信時にOS設定に合わせて送信するキーが変化します。
 
-`default.keyboard_language`と`default.os_language`が異なる場合、KeyOverridesに自動的に差異を吸収する設定が追加されます
+`default.keyboard_language`と`default.os_language`が異なる場合、KeyOverridesに自動的に差異を吸収する設定が追加されます。
 
-注: この設定はEEPROM初期化時のデフォルト値です。EEPROM上の設定値は`SET_OS_LANG_US`, `SET_OS_LANG_JP`を押すことで切り替わります
+省略した場合は`US`が設定されます。
+
+注: この設定はEEPROM初期化時のデフォルト値です。EEPROM上の設定値は`SET_OS_LANG_US`, `SET_OS_LANG_JP`を押すことで切り替わります。
 
 #### `default.mouse_gesture`
 
-マウスジェスチャが実行される移動量の閾値を設定します。
+マウスジェスチャが実行するカーソル移動量の閾値を設定します。デバイスにマウスを接続している際、レイヤを移動した状態でカーソルを動かしてから元のレイヤに戻ると、カーソルの移動方向(斜め4方向)に応じた動作を実行できます。設定例についてはサンプルを参考にしてください。
+
+省略した場合は`30`が設定されます。
 
 ### 設定可能な動作一覧
 
 #### キーコード
 
-QMKのキーコードをそのまま設定します。数値で指定することもできます
+QMKのキーコードをそのまま設定します。Keyboard Quantizer Configurator Generatorのエディタにはキーコードの補完機能も実装されています。
+
+キーコードを数値で指定することもできます。数字以外の文字はそのまま入力することもできます。`"`や`\`をそのまま指定したい場合は、`\`でエスケープしてください。
 
 例: `KC_A`, `LT(1, KC_SPC)`, `0x0004`, `4`
+```yaml
+# バックスラッシュ
+KC_BSLS
+KC_BACKSLASH
+"\\"
+# ダブルクオーテーション
+KC_DQT
+KC_DOUBLE_QUOTE
+S(KC_QUT)
+"\""
+```
 
 Keyboard Quantizer独自の拡張として下記が追加されています
 
@@ -327,7 +346,7 @@ KC_J: { tap_dance: { single_tap: KC_J, double_tap: KC_ESC }}
 
 #### コマンド
 
-コンパニオンアプリを使用している場合に、アプリから任意のコマンドを実行します。
+コンパニオンアプリを使用している場合に、アプリから任意のコマンドを実行します。指定された文字列をPowerShellの`Invoke-Expression`を使って実行します。使用にあたっては十分に注意してください。
 
 形式: `{ command : <string> }`
 
@@ -418,24 +437,32 @@ KC_J: { tap_dance: { single_tap: KC_J, double_tap: KC_ESC }}
     # 常時有効なキーマップを定義する
     keymaps:
       - keymap:
-          # レイヤ0ではボタン6,7,8に動作を変更する
+          # レイヤ0ではボタン6,7,8の動作を変更する
           layer: 0
           map:
+            # ボタン6,7でコピペ
             KC_BTN6: LCTL(KC_C)
             KC_BTN7: LCTL(KC_V)
+            # ボタン8をタップしたときは中クリック、長押ししたときはレイヤ1に移動
             KC_BTN8: LT(1, KC_BTN3)
       - keymap:
+          # レイヤ1では各ボタン、ホイール、ジェスチャに機能を割り当てる
           layer: 1
           map:
             KC_BTN1: KC_ENT
             KC_BTN2: KC_BSPC
+            # 中クリックで再生・停止
             KC_BTN3: KC_MEDIA_STOP
-            # レイヤ1でのスクロールホイールの動作を割り当てる
+            # レイヤ1でのホイールの動作を割り当てる
+            # 左右で曲送り、曲戻し
             KC_MS_WH_RIGHT: KC_MEDIA_PREV_TRACK
             KC_MS_WH_LEFT: KC_MEDIA_NEXT_TRACK
+            # 上下でウィンドウ切り替え
             KC_MS_WH_UP: LALT(KC_TAB)
             KC_MS_WH_DOWN: LSA(KC_TAB)
             # レイヤ1の状態でカーソルを動かし、レイヤ0に戻るタイミングでマウスジェスチャが実行される
+            # 左下に移動したらEndを送信
             MS_GESTURE_DL: KC_END
+            # 左上に移動したらHomeを送信
             MS_GESTURE_UL: KC_HOME
 ```
