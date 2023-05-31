@@ -62,6 +62,8 @@
 
 (省略可能) コンパニオンアプリを併用する場合に、設定値と現在アクティブなウィンドウのタイトル、プロセス名、URL（ウィンドウがedge, chrome, firefoxの場合のみ）が一致するときのみ、各キーマップやコンボ等が有効になります。各設定には正規表現を使用できます。`title`, `process`, `url`, `os` を合わせて設定した場合は、AND条件として評価されます。
 
+目的のウィンドウのタイトルやプロセス名を知りたい場合、コンパニオンアプリ起動中にタスクトレイアイコンをクリックすると直前にアクティブだったウィンドウの情報が表示されます。
+
 #### `application.os`
 
 (省略可能) 設定値と接続先のOSが一致するときのみ、各キーマップやコンボ等が有効になります。`title`, `process`, `url` と合わせて設定した場合は、AND条件として評価されます。
@@ -106,7 +108,7 @@
 
 コンボを実行するキーの組み合わせを設定します。
 
-`application.keymaps.keymap.map`で設定した置き換え後のキーで指定してください。
+実際に押すキーに合わせて設定してください。`application.keymaps.keymap.map`の設定は影響しません。
 
 #### `application.combos.combo.keycode`
 
@@ -322,6 +324,8 @@ Keyboard Quantizer独自の拡張として下記が追加されています
 QMKのマクロを設定します。
 マクロは文字列またはアクション (down, up, tap, delay)の配列で定義します。
 
+マクロ実行中に`Esc`を押すと実行を中断します。
+
 形式: `{ macro : [ <string> | { action: down|up|tap, keycodes:[<keycodes>] } | { action: delay, duration:<ms> }]}`
 
 例: `{ macro: [Macro String] }`
@@ -339,7 +343,9 @@ QMKのマクロを設定します。
 
 シングルタップ、シングルホールド（一度目の押下で長押し）、ダブルタップ、ダブルホールド（二度目の押下で長押し）のそれぞれに動作を設定できます。
 
-各動作にはタップダンス以外の動作（キーコード、マクロ等）を設定できます
+各動作にはタップダンス以外の動作（キーコード、マクロ等）を設定できます。
+
+ホールドに`MO(x)`を割り当てるとホールド時にレイヤ移動します。`LT(layer, key)`では`key`に基本キーコード（`KC_`で始まるキーコード）のみ設定できるのに対し、タップダンスでは制約がありません。
 
 形式: `{ tap_dance: { single_tap: <action>, single_hold: <action>, double_tap: <action>, double_hold: <action> }}`
 
@@ -347,6 +353,8 @@ QMKのマクロを設定します。
 ```yaml
 # jを2回タップしたらESCを入力する
 KC_J: { tap_dance: { single_tap: KC_J, double_tap: KC_ESC }}
+# マウスのボタン6をタップしたらCtrl-C,　長押ししたらレイヤ1に移動
+KC_BTN6: { tap_dance: { single_tap: LCTL(KC_C), single_hold: MO(1) }}
 ```
 
 #### コマンド
