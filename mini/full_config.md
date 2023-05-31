@@ -3,6 +3,7 @@
   - [yamlファイルの各キーの説明](#yamlファイルの各キーの説明)
     - [`application`](#application)
     - [`application.title`, `application.process`, `application.url`](#applicationtitle-applicationprocess-applicationurl)
+    - [`application.os`](#applicationos)
     - [`application.keymaps`](#applicationkeymaps)
     - [`application.keymaps.keymap`](#applicationkeymapskeymap)
     - [`application.keymaps.keymap.layer`](#applicationkeymapskeymaplayer)
@@ -59,17 +60,21 @@
 
 #### `application.title`, `application.process`, `application.url`
 
-(省略可能) コンパニオンアプリを併用する場合に、設定値と現在アクティブなウィンドウのタイトル、プロセス名、URL（ウィンドウがedge, chrome, firefoxの場合のみ）が一致するときのみ、各キーマップやコンボ等が有効になります。各設定には正規表現を使用できます。`title`, `process`, `url` を合わせて設定した場合は、AND条件として評価されます
+(省略可能) コンパニオンアプリを併用する場合に、設定値と現在アクティブなウィンドウのタイトル、プロセス名、URL（ウィンドウがedge, chrome, firefoxの場合のみ）が一致するときのみ、各キーマップやコンボ等が有効になります。各設定には正規表現を使用できます。`title`, `process`, `url`, `os` を合わせて設定した場合は、AND条件として評価されます。
+
+#### `application.os`
+
+(省略可能) 設定値と接続先のOSが一致するときのみ、各キーマップやコンボ等が有効になります。`title`, `process`, `url` と合わせて設定した場合は、AND条件として評価されます。
 
 #### `application.keymaps`
 
-レイヤごとのキーマップをグループ化します
+レイヤごとのキーマップをグループ化します。
 
 キーマップの詳細についてはQMKのドキュメントを参照してください。
 
 #### `application.keymaps.keymap`
 
-キーマップのレイヤを定義します
+キーマップのレイヤを定義します。
 
 #### `application.keymaps.keymap.layer`
 
