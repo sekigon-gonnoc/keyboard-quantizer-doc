@@ -13,6 +13,7 @@ Windowsの場合はコンパニオンアプリを実行することで、アク�
 - `Download UF2`ボタンをクリックしuf2形式で設定ファイルをダウンロードします
 - デバイスのブートローダを起動し、作成したuf2ファイルをコピーすることで設定が更新されます
 - `Upload`ボタンから設定ファイルを読み込むことで、作成した設定を読み込んで再編集することもできます
+- 設定が正しく動作するには、設定ファイルのバージョンとファームウェアのバージョンが一致している必要があります。ファームウェア更新前には設定ファイルのバックアップを取って、設定サイトで読み込みなおして最新バージョン向けに変換しなおしてください。
 
 
 OSがWindowsの場合のみ、コンパニオンアプリを使用して下記の方法で書き込み・読み込みができます。
@@ -29,3 +30,7 @@ OSがWindowsの場合のみ、コンパニオンアプリを使用して下記�
 ```
 qmk compile -kb sekigon/keyboard_quantizer/mini -km full
 ```
+
+## コンパニオンアプリの常駐設定
+
+[コンパニオンアプリ](https://github.com/sekigon-gonnoc/qmk_firmware/blob/keyboard/sekigon/keyboard_quantizer/mini-full/keyboards/sekigon/keyboard_quantizer/mini/keymaps/full/dynamic_config/quantizer_companion.ps1)のPowerShellスクリプトをスタートアップに登録してください。引数として接続先のKeyboard QuantizerのCOMポートが必要です。

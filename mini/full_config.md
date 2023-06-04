@@ -309,10 +309,10 @@ Keyboard Quantizer独自の拡張として下記が追加されています
 |キーコード|説明|
 |-|-|
 |`LAUNCH_COMPANION`|マクロ機能とvirtser機能を使用して、PCにコンパニオンアプリを送信、実行します。具体的にはWin+X, IでPowerShellを起動し、コンパニオンアプリの受信用スクリプトをマクロで送信します。送信完了後、Enterキーを押すとスクリプトが実行され、シリアルポートを通してコンパニオンアプリを送受信し実行します|
-|`SET_KB_LANG_US`|接続キーボードの配列がUS配列であるとして処理します|
-|`SET_KB_LANG_JP`|接続キーボードの配列がJIS配列であるとして処理します|
-|`SET_OS_LANG_US`|接続先OSのキーボード設定がUSであるとして処理します|
-|`SET_OS_LANG_JP`|接続先OSのキーボード設定がJPであるとして処理します|
+|`SET_KB_LANG_US`|接続キーボードの配列がUS配列だと仮定して各種処理を実行するようになります|
+|`SET_KB_LANG_JP`|接続キーボードの配列がJIS配列だと仮定して各種処理を実行するようになります|
+|`SET_OS_LANG_US`|接続先OSのキーボード設定がUSだと仮定して各種処理を実行するようになります|
+|`SET_OS_LANG_JP`|接続先OSのキーボード設定がJPたと仮定して各種処理を実行するようになります|
 |`MS_GESTURE_DR`|マウスジェスチャ（右下）の設定に使用します|
 |`MS_GESTURE_DL`|マウスジェスチャ（左下）の設定に使用します|
 |`MS_GESTURE_UL`|マウスジェスチャ（左上）の設定に使用します|
@@ -327,6 +327,8 @@ QMKのマクロを設定します。
 マクロ実行中に`Esc`を押すと実行を中断します。
 
 形式: `{ macro : [ <string> | { action: down|up|tap, keycodes:[<keycodes>] } | { action: delay, duration:<ms> }]}`
+
+`keycodes`には任意のキーコードのほか、後述のコマンドとユニコード文字列を設定することもできます。
 
 例: `{ macro: [Macro String] }`
 
@@ -478,4 +480,20 @@ KC_BTN6: { tap_dance: { single_tap: LCTL(KC_C), single_hold: MO(1) }}
             MS_GESTURE_DL: KC_END
             # 左上に移動したらHomeを送信
             MS_GESTURE_UL: KC_HOME
+```
+
+```yaml
+# マウスボタン6を長押ししている間、カーソルの移動でスクロールする
+- application:
+    keymaps:
+      - keymap:
+          layer: 0
+          map:
+            KC_BTN6: LT(1, KC_BTN6)
+      - keymap:
+          layer: 1
+          map:
+            KC_MS_LEFT: KC_MS_WH_LEFT
+            # 上下反転したい場合はKC_MS_WH_DOWNに置き換える
+            KC_MS_UP: KC_MS_WH_UP
 ```
