@@ -5,9 +5,9 @@
     - [`application.title`, `application.process`, `application.url`](#applicationtitle-applicationprocess-applicationurl)
     - [`application.os`](#applicationos)
     - [`application.keymaps`](#applicationkeymaps)
-    - [`application.keymaps.keymap`](#applicationkeymapskeymap)
-    - [`application.keymaps.keymap.layer`](#applicationkeymapskeymaplayer)
-    - [`application.keymaps.keymap.map`](#applicationkeymapskeymapmap)
+    - [`application.keymaps.layer`](#applicationkeymapslayer)
+    - [`application.keymaps.layer.id`](#applicationkeymapslayerid)
+    - [`application.keymaps.layer.keys`](#applicationkeymapslayerkeys)
     - [`application.combos`](#applicationcombos)
     - [`application.combos.combo`](#applicationcomboscombo)
     - [`application.combos.combo.keys`](#applicationcomboscombokeys)
@@ -74,15 +74,15 @@
 
 キーマップの詳細についてはQMKのドキュメントを参照してください。
 
-#### `application.keymaps.keymap`
+#### `application.keymaps.layer`
 
 キーマップのレイヤを定義します。
 
-#### `application.keymaps.keymap.layer`
+#### `application.keymaps.layer.id`
 
 キーマップのレイヤ番号を設定します。設定可能範囲は0-15です。
 
-#### `application.keymaps.keymap.map`
+#### `application.keymaps.layer.keys`
 
 `<from>: <to>`の形式で置き換え前のキーと置き換え後の動作を設定します。
 
@@ -386,9 +386,9 @@ KC_BTN6: { tap_dance: { single_tap: LCTL(KC_C), single_hold: MO(1) }}
 - application:
     # 常時有効な設定
     keymaps:
-      - keymap:
-          layer: 0
-          map:
+      - layer:
+          id: 0
+          keys:
             # CAPSを単押しTAB, 長押しCTRL
             KC_CAPS: LCTL_T(KC_TAB)
             # RSHIFTを単押しでLEADER,　長押しでSHIFT
@@ -451,19 +451,19 @@ KC_BTN6: { tap_dance: { single_tap: LCTL(KC_C), single_hold: MO(1) }}
 - application:
     # 常時有効なキーマップを定義する
     keymaps:
-      - keymap:
+      - layer:
           # レイヤ0ではボタン6,7,8の動作を変更する
-          layer: 0
-          map:
+          id: 0
+          keys:
             # ボタン6,7でコピペ
             KC_BTN6: LCTL(KC_C)
             KC_BTN7: LCTL(KC_V)
             # ボタン8をタップしたときは中クリック、長押ししたときはレイヤ1に移動
             KC_BTN8: LT(1, KC_BTN3)
-      - keymap:
+      - layer:
           # レイヤ1では各ボタン、ホイール、ジェスチャに機能を割り当てる
-          layer: 1
-          map:
+          id: 1
+          keys:
             KC_BTN1: KC_ENT
             KC_BTN2: KC_BSPC
             # 中クリックで再生・停止
@@ -486,13 +486,13 @@ KC_BTN6: { tap_dance: { single_tap: LCTL(KC_C), single_hold: MO(1) }}
 # マウスボタン6を長押ししている間、カーソルの移動でスクロールする
 - application:
     keymaps:
-      - keymap:
-          layer: 0
-          map:
+      - layer:
+          id: 0
+          keys:
             KC_BTN6: LT(1, KC_BTN6)
-      - keymap:
-          layer: 1
-          map:
+      - layer:
+          id: 1
+          keys:
             KC_MS_LEFT: KC_MS_WH_LEFT
             # 上下反転したい場合はKC_MS_WH_DOWNに置き換える
             KC_MS_UP: KC_MS_WH_UP
