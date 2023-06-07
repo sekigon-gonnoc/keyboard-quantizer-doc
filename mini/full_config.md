@@ -8,6 +8,7 @@
     - [`application.keymaps.layer`](#applicationkeymapslayer)
     - [`application.keymaps.layer.id`](#applicationkeymapslayerid)
     - [`application.keymaps.layer.keys`](#applicationkeymapslayerkeys)
+    - [`application.keymaps.layer.mouse`](#applicationkeymapslayermouse)
     - [`application.combos`](#applicationcombos)
     - [`application.combos.combo`](#applicationcomboscombo)
     - [`application.combos.combo.keys`](#applicationcomboscombokeys)
@@ -93,6 +94,15 @@
 置き換えを設定しないキーについてはレイヤによって下記のように扱われます。
 - レイヤ0: 置き換えなし
 - レイヤ1以降:`KC_TRNS`
+
+#### `application.keymaps.layer.mouse`
+
+レイヤごとのマウス設定を定義します。
+
+`scale_x`: x移動量のスケーリングを変更します。
+`scale_y`: y移動量のスケーリングを変更します。
+`scale_v`: v移動量のスケーリングを変更します。
+`scale_h`: h移動量のスケーリングを変更します。
 
 #### `application.combos`
 
@@ -317,6 +327,12 @@ Keyboard Quantizer独自の拡張として下記が追加されています
 |`MS_GESTURE_DL`|マウスジェスチャ（左下）の設定に使用します|
 |`MS_GESTURE_UL`|マウスジェスチャ（左上）の設定に使用します|
 |`MS_GESTURE_UR`|マウスジェスチャ（右上）の設定に使用します|
+|`MS_CURSOR_X`|x方向のマウスカーソルの移動をスクロール/ホイールに変換するときに後述のキーコードと組み合わせて使用します|
+|`MS_CURSOR_Y`|y方向のマウスカーソルの移動をスクロール/ホイールに変換するときに後述のキーコードと組み合わせて使用します|
+|`MS_CURSOR_SCROLL_H`|x方向のマウスカーソルの移動をスクロールに変換します|
+|`MS_CURSOR_SCROLL_V`|y方向のマウスカーソルの移動をスクロールに変換します|
+|`MS_CURSOR_WHEEL_H`|x方向のマウスカーソルの移動をホイールに変換します。他の行でホイールの動作が設定されている場合はその動作が実行されます|
+|`MS_CURSOR_WHEEL_V`|y方向のマウスカーソルの移動をホイールに変換します。他の行でホイールの動作が設定されている場合はその動作が実行されます|
 
 
 #### マクロ
@@ -460,6 +476,10 @@ KC_BTN6: { tap_dance: { single_tap: LCTL(KC_C), single_hold: MO(1) }}
             KC_BTN7: LCTL(KC_V)
             # ボタン8をタップしたときは中クリック、長押ししたときはレイヤ1に移動
             KC_BTN8: LT(1, KC_BTN3)
+          mouse:
+            # xyの移動速度を1.5にする
+            scale_x: 1.5
+            scale_y: 1.5
       - layer:
           # レイヤ1では各ボタン、ホイール、ジェスチャに機能を割り当てる
           id: 1
@@ -493,7 +513,9 @@ KC_BTN6: { tap_dance: { single_tap: LCTL(KC_C), single_hold: MO(1) }}
       - layer:
           id: 1
           keys:
-            KC_MS_LEFT: KC_MS_WH_LEFT
-            # 上下反転したい場合はKC_MS_WH_DOWNに置き換える
-            KC_MS_UP: KC_MS_WH_UP
+            MS_CURSOR_X: MS_CURSOR_SCROLL_H
+            MS_CURSOR_Y: MS_CURSOR_SCROLL_V
+          mouse:
+            ## 上下を入れ替えたい場合はスケールを負の値に設定する
+            #scale_y: -1
 ```
