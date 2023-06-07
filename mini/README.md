@@ -6,7 +6,9 @@ Keyboard Quantizerは一般的なUSBキーボードやマウスを自作キー�
 
 デフォルトではRemap用ファームウェアが書き込まれています。
 
-ファームウェアによってキーマップの書き換え方が異なります。それぞれのページを参照してください
+ファームウェアによってキーマップの書き換え方が異なります。それぞれのページを参照してください。
+
+ビルド済みのファームウェアは[Release](https://github.com/sekigon-gonnoc/keyboard-quantizer-doc/releases) ページにアップロードしています。
 
 ### [remap](remap.md)
 
