@@ -174,7 +174,7 @@ Keyboard Quantizer Configuratorで  `Use last layer as combo setting` を有効�
 ### キーマップのオプション
 #### レポートパーサの設定
 
-デフォルトのファームで目的のデバイスが認識できない場合はkeymap.cに独自のパーサを実装してください。[解説](user_parser)|
+デフォルトのファームで目的のデバイスが認識できない場合はkeymap.cに独自のパーサを実装してください。[解説](user_parser.md)|
 
 #### シリアルポート
 - シリアルポートからデバッグ情報を読み出したりブートローダを起動したりできます
