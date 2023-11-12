@@ -1,7 +1,9 @@
 
 # Vialファームウェア
 
-[Vial](https://vial.rocks/)および最新版[Remap](https://remap-keys.app/)でのキーマップ書き換えに対応したファームウェアです
+[Vial](https://vial.rocks/)および最新版[Remap](https://remap-keys.app/)でのキーマップ書き換えに対応したファームウェアです。
+
+ビルド済みのファームウェアは[Release](https://github.com/sekigon-gonnoc/keyboard-quantizer-doc/releases) ページにアップロードしています。
 
 ## キーマップの書き換え
 
