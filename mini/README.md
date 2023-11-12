@@ -10,9 +10,9 @@ Keyboard Quantizerは一般的なUSBキーボードやマウスを自作キー�
 
 ビルド済みのファームウェアは[Release](https://github.com/sekigon-gonnoc/keyboard-quantizer-doc/releases) ページにアップロードしています。
 
-### [remap](remap.md)
+### [vial](vial.md)
 
-[REMAP](https://remap-keys.app/)でのキーマップ書き換えに対応したファームウェアです
+[vial](https://vial.rocks/)および最新版[Remap](https://remap-keys.app/)でのキーマップ書き換えに対応したファームウェアです
 
 ### [full](full.md) (β版)
 
@@ -20,16 +20,20 @@ Keyboard Quantizerは一般的なUSBキーボードやマウスを自作キー�
 
 Windowsの場合はコンパニオンアプリを実行することで、アクティブなアプリに応じてキーマップを切り替えたり、キーボードからユニコード文字を送信することもできます。コンパニオンアプリはPowerShellスクリプトで実装されており、キーボードからPCに送信して実行できるため、PCに追加のソフトウェアをインストールする必要はありません。
 
+### [remap(<=0.18)](remap.md)
+
+[Remap](https://qmk018.remap-keys.app/)(QMK0.18以下向け)でのキーマップ書き換えに対応したファームウェアです
+
 ## ファームウェアの書き換え方法
 
 ファームウェアを書き換えるには、Keyboad Quantizerのブートローダを起動する必要があります。
 
 ブートローダを起動することでKeyboard QuantizerはUSBストレージとして認識されます。このストレージに書き込みたいファームウェアのUF2ファイルをコピーすることで、ファームウェアが書き換えられます。
 
-ブートローダを起動するには、キー割り当てで`QK_BOOT`を設定したキーを入力するか、Tera Termなどのシリアルポートから操作します。
+ブートローダを起動するには、キー割り当てで`QK_BOOT`を設定したキーを入力するか、Tera Termなどのターミナルソフトから操作します。
 
 - remapファームウェアの場合
   - シリアルデバイスに1200bpsで接続する
   - または、1200bps以外の速度で接続し`b`を送信する
-- fullファームウェアの場合
+- fullおよびvialファームウェアの場合
   - シリアルデバイスに接続し、`dfu`と入力しEnterキーを押す
