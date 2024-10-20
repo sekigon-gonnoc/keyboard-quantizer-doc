@@ -36,7 +36,7 @@ Remap上ではHoldにレイヤ移動を、Tapにマウスボタンを指定で�
 
 ファームウェア自体に変更を加えたい場合はファームウェアをビルドしてください。
 
-[リポジトリ](https://github.com/sekigon-gonnoc/vial-qmk)
+[リポジトリ](https://github.com/sekigon-gonnoc/vial-qmk/tree/bmp-vial-1.0.6) (bmp-vial-1.0.6をgcc10でビルドしています)
 
 ```
 make sekigon/keyboard_quantizer/mini:vial:uf2 
