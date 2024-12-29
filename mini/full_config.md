@@ -3,7 +3,7 @@
   - [yamlファイルの各キーの説明](#yamlファイルの各キーの説明)
     - [`application`](#application)
     - [`application.title`, `application.process`, `application.url`](#applicationtitle-applicationprocess-applicationurl)
-    - [`application.os`](#applicationos)
+    - [`application.os_variant`](#applicationos_variant)
     - [`application.keymaps`](#applicationkeymaps)
     - [`application.keymaps.layer`](#applicationkeymapslayer)
     - [`application.keymaps.layer.id`](#applicationkeymapslayerid)
@@ -65,9 +65,9 @@
 
 目的のウィンドウのタイトルやプロセス名を知りたい場合、コンパニオンアプリ起動中にタスクトレイアイコンをクリックすると直前にアクティブだったウィンドウの情報が表示されます。
 
-#### `application.os`
+#### `application.os_variant`
 
-(省略可能) 設定値と接続先のOSが一致するときのみ、各キーマップやコンボ等が有効になります。`title`, `process`, `url` と合わせて設定した場合は、AND条件として評価されます。
+(省略可能) 設定値と接続先のOSが一致するときのみ、各キーマップやコンボ等が有効になります (`Any`, `Linux`, `Windows`, `macOS` or `iOS`)。`title`, `process`, `url` と合わせて設定した場合は、AND条件として評価されます。
 
 #### `application.keymaps`
 
